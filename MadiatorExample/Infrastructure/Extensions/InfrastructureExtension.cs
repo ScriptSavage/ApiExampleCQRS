@@ -22,6 +22,7 @@ public static class InfrastructureExtension
         services.AddScoped<IBookRepository, BookRepository>();
         services.AddScoped<IAuthorRepository, AuthorRepository>();
         services.AddScoped<IGenreRepository, GenreRepository>();
+        services.AddScoped<IAuthRepository, AuthRepository>();
     }
 
 }

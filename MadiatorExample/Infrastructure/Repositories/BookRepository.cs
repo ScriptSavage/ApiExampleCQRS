@@ -43,4 +43,53 @@ public class BookRepository : IBookRepository
 
         return data;
     }
+
+    public async Task<Book> GetBookByIdAsync(int bookId)
+    {
+        var book = await _context.Books
+            .FirstOrDefaultAsync(e => e.BookId == bookId);
+
+        return book;
+    }
+
+    public async Task<bool> DoesBookExistAsync(int bookId)
+    {
+        var doesExists = await _context.Books
+            .AnyAsync(e => e.BookId == bookId);
+        
+        return doesExists;
+    }
+
+    public async Task<int> GetBookIdByTitleAsync(string title)
+    {
+        var book = await _context.Books
+            .FirstOrDefaultAsync(e => e.Title == title);
+
+        return book.BookId;
+    }
+
+    public async Task<int> DeleteGenreFromBookAsync(int bookId, int genreId)
+    {
+        var data = await _context.BookGenres
+            .FirstOrDefaultAsync(e => e.BookId == bookId && e.GenreId == genreId);
+        
+        _context.BookGenres.Remove(data);
+
+       return await _context.SaveChangesAsync();
+    }
+
+    public async Task<int> AddGenreToBookAsync(BookGenre bookGenre)
+    {
+         await _context.BookGenres.AddAsync(bookGenre);
+         return await _context.SaveChangesAsync();
+    }
+
+    public async Task<bool> DoesGenreExistAsync(int genreId)
+    {
+        var doesGenreExists = await _context.Books
+            .Include(e=>e.BookGenres)
+            .AnyAsync(e => e.BookGenres.Any(e=>e.GenreId == genreId));
+        
+        return doesGenreExists;
+    }
 }

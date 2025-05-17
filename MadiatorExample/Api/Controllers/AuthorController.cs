@@ -1,10 +1,12 @@
 using Application.Commands.CreateAuthor;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/authors")]
 public class AuthorController : ControllerBase
 {

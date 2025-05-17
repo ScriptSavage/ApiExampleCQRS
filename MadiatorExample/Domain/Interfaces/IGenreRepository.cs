@@ -8,4 +8,6 @@ public interface IGenreRepository
     Task<List<Genre>> GetAllGenres();
     
     Task<List<Genre>> GetAllGenresByIdAsync(IEnumerable<int> genresId);
+
+    Task<bool> DoesGenreExistAsync(int genreId);
 }

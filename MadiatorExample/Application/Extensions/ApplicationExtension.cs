@@ -1,5 +1,8 @@
 using Application.Commands.CreateAuthor;
+using Application.Commands.CreateBook;
 using Application.Commands.CreateGenre;
+using Application.Commands.CreateNewUser;
+using Application.Commands.LoginUser;
 using Application.Queries.GetAllBooks;
 using Application.Queries.GetAllGenres;
 using Application.Queries.GetBookDetails;
@@ -21,6 +24,9 @@ public static class ApplicationExtension
         services.AddMediatR(typeof(GetAllBooksQuery));
         services.AddMediatR(typeof(GetGenresQuery));
         services.AddMediatR(typeof(GetBookDetailsQuery));
+
+        services.AddMediatR(typeof(CreateNewUserCommand));
+        services.AddMediatR(typeof(LoginUserCommand));
     }
     
     

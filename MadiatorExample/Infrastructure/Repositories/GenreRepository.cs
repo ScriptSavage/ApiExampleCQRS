@@ -33,4 +33,10 @@ public class GenreRepository : IGenreRepository
             .Where(e=>genresId.Contains(e.GenreId))
             .ToListAsync();
     }
+
+    public async Task<bool> DoesGenreExistAsync(int genreId)
+    {
+        var data = await _context.Genres.AnyAsync(e=>e.GenreId == genreId);
+        return data;
+    }
 }
